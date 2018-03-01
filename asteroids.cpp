@@ -553,35 +553,36 @@ void physics()
 	struct timespec bt;
 	clock_gettime(CLOCK_REALTIME, &bt);
 	int i=0;
-	while (i < g.nbullets) {
-		Bullet *b = &g.barr[i];
-		//How long has bullet been alive?
-		double ts = timeDiff(&b->time, &bt);
-		if (ts > 2.5) {
-			//time to delete the bullet.
-			memcpy(&g.barr[i], &g.barr[g.nbullets-1],
-				sizeof(Bullet));
-			g.nbullets--;
-			//do not increment i.
-			continue;
-		}
-		//move the bullet
-		b->pos[0] += b->vel[0];
-		b->pos[1] += b->vel[1];
-		//Check for collision with window edges
-		if (b->pos[0] < 0.0) {
-			b->pos[0] += (float)gl.xres;
-		}
-		else if (b->pos[0] > (float)gl.xres) {
-			b->pos[0] -= (float)gl.xres;
-		}
-		else if (b->pos[1] < 0.0) {
-			b->pos[1] += (float)gl.yres;
-		}
-		else if (b->pos[1] > (float)gl.yres) {
-			b->pos[1] -= (float)gl.yres;
-		}
-		i++;
+	while (i < g.nbullets) 
+	{
+	    Bullet *b = &g.barr[i];
+	    //How long has bullet been alive?
+	    double ts = timeDiff(&b->time, &bt);
+	    if (ts > 2.5) 
+	    {
+		//time to delete the bullet.
+		memcpy(&g.barr[i], &g.barr[g.nbullets-1], sizeof(Bullet));
+		g.nbullets--;
+		//do not increment i.
+		continue;
+	    }
+	    //move the bullet
+	    b->pos[0] += b->vel[0];
+	    b->pos[1] += b->vel[1];
+	    //Check for collision with window edges
+	    if (b->pos[0] < 0.0) {
+		b->pos[0] += (float)gl.xres;
+	    }
+	    else if (b->pos[0] > (float)gl.xres) {
+		b->pos[0] -= (float)gl.xres;
+	    }
+	    else if (b->pos[1] < 0.0) {
+		b->pos[1] += (float)gl.yres;
+	    }
+	    else if (b->pos[1] > (float)gl.yres) {
+		b->pos[1] -= (float)gl.yres;
+	    }
+	    i++;
 	}
 	//
 	//Update asteroid positions
@@ -683,7 +684,7 @@ void physics()
 		Flt ydir = sin(rad);
 		g.ship.vel[0] += xdir*0.02f;
 		g.ship.vel[1] += ydir*0.02f;
-		Flt speed = sqrt(g.ship.vel[0]*g.ship.vel[0]+
+		    Flt speed = sqrt(g.ship.vel[0]*g.ship.vel[0]+
 				g.ship.vel[1]*g.ship.vel[1]);
 		if (speed > 10.0f) {
 			speed = 10.0f;
@@ -748,6 +749,8 @@ void render()
 	ggprint8b(&r, 16, 0x00ffff00, "n asteroids destroyed: ");
 	extern void showName(const char *name, int x, int y);
 	showName("Terry Langhardt", r.left, 250);
+	extern void drawBox(int xres, int yres);
+        drawBox(gl.xres, gl.yres);
 	//
 	//-------------
 	//Draw the ship
