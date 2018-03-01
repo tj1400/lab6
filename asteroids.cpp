@@ -748,7 +748,6 @@ void render()
 	ggprint8b(&r, 16, 0x00ffff00, "n asteroids: %i", g.nasteroids);
 	ggprint8b(&r, 16, 0x00ffff00, "n asteroids destroyed: ");
 	extern void showName(const char *name, int x, int y);
-	showName("Terry Langhardt", r.left, 250);
 	extern void drawBox(int xres, int yres);
         drawBox(gl.xres, gl.yres);
 	//
